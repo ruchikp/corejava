@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 27, 2015 11:17:45 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.digi.hibernate.Customer" table="customer" catalog="databasetest" optimistic-lock="version">
+        <id name="custId" type="java.lang.Integer">
+            <column name="cust_id" />
+            <generator class="identity" />
+        </id>
+        <property name="custName" type="string">
+            <column name="cust_name" length="20" />
+        </property> 
+        <property name="orderName" type="string">
+            <column name="order_name" length="20" not-null="true" />
+        </property>
+        <set name="customerOrders" table="customer_order" inverse="true" lazy="true" fetch="select" cascade="save-update">
+            <key>
+                <column name="cust_id" not-null="true" />
+            </key>
+            <one-to-many class="com.digi.hibernate.Customer" />
+        </set>
+    </class>
+</hibernate-mapping>
